@@ -11,12 +11,10 @@ RUN apt-get update && \
 COPY entrypoint.sh /bin/
 COPY set-exim4-update-conf /bin/
 
-RUN chown 1001:1001 /bin; \
-    chown 1001:1001 /bin/*; \
-    chown 1001:1001 /etc/exim4; \
-    chown 1001:1001 /etc/exim4/*; \
-    chmod +x /bin/entrypoint.sh; \
-    chmod +x /bin/set-exim4-update-conf
+RUN chgrp -R 0 /bin; \
+    chgrp -R 0 /etc/exim4; \
+    chmod g+rwX /bin/entrypoint.sh; \
+    chmod g+rwX /bin/set-exim4-update-conf
 
 EXPOSE 1025
 
