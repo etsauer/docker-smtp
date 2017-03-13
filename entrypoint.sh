@@ -21,12 +21,12 @@ if [ "$KEY_PATH" -a "$CERTIFICATE_PATH" ]; then
 fi
 
 opts=(
-	dc_local_interfaces "[0.0.0.0]:${PORT:-25} ; [::0]:${PORT:-25}"
+	dc_local_interfaces "[0.0.0.0]:${PORT:-1025} ; [::0]:${PORT:-1025}"
 	dc_other_hostnames ''
 	dc_relay_nets "$(ip addr show dev eth0 | awk '$1 == "inet" { print $2 }')${RELAY_NETWORKS}"
 )
 
-if [ "$DISABLE_IPV6" ]; then 
+if [ "$DISABLE_IPV6" ]; then
         echo 'disable_ipv6=true' >> /etc/exim4/exim4.conf.localmacros
 fi
 

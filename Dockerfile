@@ -14,6 +14,7 @@ COPY set-exim4-update-conf /bin/
 RUN chmod a+x /bin/entrypoint.sh && \
     chmod a+x /bin/set-exim4-update-conf
 
-EXPOSE 25
+EXPOSE 1025
+#EXPOSE 25
 ENTRYPOINT ["/bin/entrypoint.sh"]
 CMD ["exim", "-bd", "-q15m", "-v"]
