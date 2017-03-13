@@ -11,10 +11,15 @@ RUN apt-get update && \
 COPY entrypoint.sh /bin/
 COPY set-exim4-update-conf /bin/
 
-RUN chmod a+x /bin/entrypoint.sh && \
-    chmod a+x /bin/set-exim4-update-conf
+RUN chown 1001:1001 /bin; \
+    chown 1001:1001 /bin/*; \
+    chown 1001:1001 /etc/exim4; \
+    chown 1001:1001 /etc/exim4/*; \
+    chmod +x /bin/entrypoint.sh; \
+    chmod +x /bin/set-exim4-update-conf
 
 EXPOSE 1025
-#EXPOSE 25
+
+USER 1001
 ENTRYPOINT ["/bin/entrypoint.sh"]
 CMD ["exim", "-bd", "-q15m", "-v"]
